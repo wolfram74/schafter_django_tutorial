@@ -1,26 +1,32 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import time
-# Create your views here.
+import datetime
+
+today = datetime.date.today()
+yesterday = today + datetime.timedelta(days=-1)
+posts = [
+    {
+        'author':'perp1',
+        'title':'bost plog 1',
+        'content':'fumble buckets',
+        'date_posted':today,
+    },
+    {
+        'author':'perp2',
+        'title':'bost plog 4',
+        'content':'fumble truckets',
+        'date_posted':yesterday,
+    },
+]
+
 
 def home(request):
-    template = '''
-    <h1>blog home</h1>
-    <br>
-    <h2> %d </h2>
-    '''
-
-    return HttpResponse(
-        template % time.time()
-        )
+    context = {
+        'posts':posts
+    }
+    print(str(posts[0]['date_posted']))
+    return render(request, 'blog/home.html', context)
 
 def about(request):
-    template = '''
-    <h1>blog about</h1>
-    <br>
-    <h2> %d </h2>
-    <p>we're all pickles with anxiety</p>
-    '''
-    return HttpResponse(
-        template % time.time()
-        )
+    return render(request, 'blog/about.html', {'title':'about'})
