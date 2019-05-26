@@ -1,0 +1,3 @@
+>> manage.py startapp sub_project_name
+think of apps as compartmentalized logical/functional behavior
+main project has installed apps list to keep track of what's included, found in settings
